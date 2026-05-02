@@ -1,15 +1,28 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
-        }
+        AuthMiddleware auth  =  new AuthMiddleware();
+        PermissaoMiddleware permissao = new PermissaoMiddleware();
+        ValidacaoMiddleware validacao = new ValidacaoMiddleware();
+        LogMiddleware log = new LogMiddleware();
+        ControllerMiddleware controller = new ControllerMiddleware();
+
+        auth.setProximo(permissao);
+        permissao.setProximo(validacao);
+        validacao.setProximo(log);
+        log.setProximo(controller);
+
+        System.out.println("------CENÁRIO 1------");
+        auth.processar(new Requisicao("admin","valido","admin",true));
+
+        System.out.println("\n------CENÁRIO 2------");
+        auth.processar(new Requisicao("admin","invalido","admin",true));
+
+        System.out.println("\n------CENÁRIO 3------");
+        auth.processar(new Requisicao("admin","valido","junior",true));
+
+        System.out.println("\n------CENÁRIO 4------");
+        auth.processar(new Requisicao("admin","valido","admin",false));
+
     }
 }
