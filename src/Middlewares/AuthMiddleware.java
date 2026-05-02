@@ -1,9 +1,14 @@
+package Middlewares;
+
+import Base.Middleware;
+import Base.Requisicao;
+
 public class AuthMiddleware extends Middleware {
 
     @Override
     public boolean processar(Requisicao req) {
         if ((req.getToken().equalsIgnoreCase("valido"))){
-            if(!(proximo == null)) {
+            if((proximo != null)) {
                 return proximo.processar(req);
             }
             return true;

@@ -1,8 +1,13 @@
-public class LogMiddleware extends Middleware{
+package Middlewares;
+
+import Base.Middleware;
+import Base.Requisicao;
+
+public class LogMiddleware extends Middleware {
     @Override
     public boolean processar(Requisicao req) {
         System.out.println("LOG: Requisição processada");
-        if(!(proximo == null)) {
+        if(proximo != null) {
             return proximo.processar(req);
         }
         return true;

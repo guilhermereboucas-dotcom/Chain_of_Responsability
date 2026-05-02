@@ -1,8 +1,13 @@
-public class ValidacaoMiddleware extends Middleware{
+package Middlewares;
+
+import Base.Middleware;
+import Base.Requisicao;
+
+public class ValidacaoMiddleware extends Middleware {
     @Override
     public boolean processar(Requisicao req) {
         if (req.isDadosValidos()){
-            if(!(proximo == null)) {
+            if(proximo != null) {
                 return proximo.processar(req);
             }
             return true;

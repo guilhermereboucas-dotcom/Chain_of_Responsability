@@ -1,8 +1,13 @@
-public class PermissaoMiddleware extends Middleware{
+package Middlewares;
+
+import Base.Middleware;
+import Base.Requisicao;
+
+public class PermissaoMiddleware extends Middleware {
     @Override
     public boolean processar(Requisicao req) {
         if ((req.getPermissao().equalsIgnoreCase("admin"))){
-            if(!(proximo == null)) {
+            if(proximo != null) {
                 return proximo.processar(req);
             }
             return true;

@@ -1,3 +1,5 @@
+package Base;
+
 public abstract class Middleware {
 
     protected Middleware proximo;

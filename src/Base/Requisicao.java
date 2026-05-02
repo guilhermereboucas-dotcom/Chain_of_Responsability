@@ -1,3 +1,5 @@
+package Base;
+
 public class Requisicao {
 
     private String usuario;
